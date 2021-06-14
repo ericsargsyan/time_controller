@@ -10,11 +10,54 @@
     <title>Home</title>
 </head>
 <body>
+<header>
+		<div class="container1">
+			<div class="menu">
+				<ul>
+					{% if not request.user.is_authenticated %}
+					<li>
+						<a href="{% url 'register_page' %}">
+							<i class="fa fa-user-o" aria-hidden="true"></i>
+							Sign Up
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'login_page' %}">
+							<i class="fa fa-sign-in" aria-hidden="true"></i>
+							Sign In
+						</a>
+					</li>
+					{% else %}
+					<li>
+						<a href="{% url 'profile_page' %}">
+							<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+							{{ request.user.username }}
+						</a>
+					</li>
+					<li>
+						<a href="{% url 'logout_page' %}">
+							<i class="fa fa-sign-out" aria-hidden="true"></i>
+							 Sign Out
+						</a>
+				   </li>
+					{% endif %}
+				</ul>
+			</div>
+  		</div>
+	</header>
     <div class="container">
-        <button class="start">Work Start</button>
+        <form method="POST" action="{% url 'start_work' %}">
+            {% csrf_token %}
+            <button class="start">Work Start</button>
+        </form>
+
         <button class="start1">Break Start</button>
         <button class="end1">Break Finished</button>
-        <button class="end">Work Finished</button>
+
+        <form method="POST" action="{% url 'end_work' %}">
+            {% csrf_token %}
+            <button class="end">Work Finished</button>
+        </form>
     </div>
 </body>
 </html>

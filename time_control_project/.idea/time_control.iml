@@ -3,8 +3,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/time_control_venv" />
+      <excludeFolder url="file://$MODULE_DIR$/my_env" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (time_control_project)" jdkType="Python SDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
