@@ -62,12 +62,12 @@
             <button class="start">Work Start</button>
         </form>
 
-		<form method="POST" action="{% url 'start_work' %}">
+		<form method="POST" action="{% url 'start_break' %}">
             {% csrf_token %}
             <button class="start1">Break Start</button>
         </form>
 
-		<form method="POST" action="{% url 'start_work' %}">
+		<form method="POST" action="{% url 'end_break' %}">
             {% csrf_token %}
              <button class="end1">Break Finished</button>
         </form>
