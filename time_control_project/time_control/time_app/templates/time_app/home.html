@@ -45,14 +45,32 @@
 			</div>
   		</div>
 	</header>
+	<div class="row">
+        <div class="col-md-12">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+          {{ message }}
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+	</div>
     <div class="container">
         <form method="POST" action="{% url 'start_work' %}">
             {% csrf_token %}
             <button class="start">Work Start</button>
         </form>
 
-        <button class="start1">Break Start</button>
-        <button class="end1">Break Finished</button>
+		<form method="POST" action="{% url 'start_work' %}">
+            {% csrf_token %}
+            <button class="start1">Break Start</button>
+        </form>
+
+		<form method="POST" action="{% url 'start_work' %}">
+            {% csrf_token %}
+             <button class="end1">Break Finished</button>
+        </form>
 
         <form method="POST" action="{% url 'end_work' %}">
             {% csrf_token %}
@@ -61,4 +79,5 @@
     </div>
 </body>
 </html>
-    
+
+
