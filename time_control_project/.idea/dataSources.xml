@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:C:\Users\Eric Sargsyan\Desktop\New folder\time_controller\time_control_project\time_control\db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="db [2]" uuid="90d28e84-62ca-4325-af87-1c1f05e4fb57">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\Eric Sargsyan\Desktop\time_controller\time_control_project\time_control\db.sqlite3</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
