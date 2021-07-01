@@ -44,7 +44,6 @@ def start_break(request):
     if not Timer.objects.filter(user=request.user, end_work__contains=restriction):
            #  and Timer.objects.all().filter(user=request.user, end_break__isnull=True):
         Timer.objects.filter(user=request.user, start_work__startswith=restriction).update(start_break=break_time_start)
-        # Break.objects.create(user=request.user, start_break=break_time_start)
 
         print('######################################################################')
         print(break_time_start)
@@ -62,20 +61,26 @@ def end_break(request):
     if not Timer.objects.filter(user=request.user, end_work__contains=restriction):
            # and Timer.objects.all().filter(user=request.user, start_break__isnull=True):
         Timer.objects.filter(user=request.user, start_work__startswith=restriction).update(end_break=break_time_end)
-        # Break.objects.all().filter(user=request.user, start_break__startswith="????????").update(end_break=break_time_end)
+        Break.objects.create(user=request.user, start_break=str(Timer.objects.filter(user=request.user, start_work__startswith=restriction)).split('|')[2], end_break=break_time_end)
+        away = float(str(Timer.objects.all().filter(user=request.user)).split('|')[5].split('>')[0])
+        # print(type(away))
+        print(away)
+        print('######################################################################')
+        away += (datetime.datetime.strptime(
+           str(Timer.objects.all().filter(user=request.user, start_work__startswith=restriction)).split('|')[3],
+           '%m/%d/%Y, %H:%M:%S') - datetime.datetime.strptime(
+           str(Timer.objects.all().filter(user=request.user)).split('|')[2],
+           '%m/%d/%Y, %H:%M:%S')).total_seconds() / 60
+        # print(away)
+        # print()
+        print('######################################################################')
+        print(away)
+        Timer.objects.all().filter(user=request.user, start_work__startswith=restriction).update(away=away)
+
+    # Break.objects.all().filter(user=request.user, start_break__startswith="????????").update(end_break=break_time_end)
     else:
         messages.error(request, "Your workday is over!")
 
-    away = float(str(Timer.objects.all().filter(user=request.user)).split('|')[5].split('>')[0])
-    print(type(away))
-    print('######################################################################')
-    away += (datetime.datetime.strptime(str(Timer.objects.all().filter(user=request.user, start_work__startswith=restriction)).split('|')[3], '%m/%d/%Y, %H:%M:%S') - datetime.datetime.strptime(str(Timer.objects.all().filter(user=request.user)).split('|')[2], '%m/%d/%Y, %H:%M:%S')).total_seconds() / 60
-    print(away)
-    print('######################################################################')
-
-
-
-    Timer.objects.all().filter(user=request.user, start_work__startswith=restriction).update(away=away)
 
     # away = str(Timer.objects.all().filter(user=request.user).split('|'))[3] - \
     #        str(Timer.objects.all().filter(user=request.user).split('|'))[2]
@@ -139,31 +144,31 @@ def end_work(request):
 
     if not Timer.objects.all().filter(user=request.user, end_work__contains=restriction):
         Timer.objects.all().filter(user=request.user, start_work__startswith=restriction).update(end_work=end_time)
+
+        print('######################################################################')
+        # print(workday)
+        # print(str(end_time), type(end_time))
+        # 3 print(workday)
+        # print(Timer.objects.all().filter(user=request.user, start_work__startswith='2021-06-15'))
+        print('######################################################################')
+        # Timer.objects.update(user=request.user, end_work=end_time)
+        # Timer.objects.update(user=request.user, start_work=workday, end_work=end_time)
+
+        # actual_worked_hours = (datetime.datetime.strptime(str(Timer.objects.all().filter(user=request.user, start_work__startswith=restriction)).split('|')[4], '%m/%d/%Y, %H:%M:%S') - datetime.datetime.strptime(str(Timer.objects.all().filter(user=request.user)).split('|')[1], '%m/%d/%Y, %H:%M:%S')).total_seconds() / 60
+        actual_worked_hours = ((datetime.datetime.strptime(
+            str(Timer.objects.all().filter(user=request.user, start_work__startswith=restriction)).split('|')[4],
+            '%m/%d/%Y, %H:%M:%S') - datetime.datetime.strptime(
+            str(Timer.objects.all().filter(user=request.user)).split('|')[1],
+            '%m/%d/%Y, %H:%M:%S')).total_seconds() / 60) - float(
+            str(Timer.objects.filter(user=request.user, start_work__startswith=restriction)).split('|')[5].split('>')[
+                0])
+        print(actual_worked_hours)
+        Timer.objects.filter(user=request.user, start_work__startswith=restriction).update(
+            actual_worked_hours=actual_worked_hours / 60)
+
     else:
         messages.error(request, "You cant press that button now, try later")
-    print('######################################################################')
-    # print(workday)
-    # print(str(end_time), type(end_time))
-    #3 print(workday)
-    # print(Timer.objects.all().filter(user=request.user, start_work__startswith='2021-06-15'))
-    print('######################################################################')
-    # Timer.objects.update(user=request.user, end_work=end_time)
-    # Timer.objects.update(user=request.user, start_work=workday, end_work=end_time)
-
-    # actual_worked_hours = (datetime.datetime.strptime(str(Timer.objects.all().filter(user=request.user, start_work__startswith=restriction)).split('|')[4], '%m/%d/%Y, %H:%M:%S') - datetime.datetime.strptime(str(Timer.objects.all().filter(user=request.user)).split('|')[1], '%m/%d/%Y, %H:%M:%S')).total_seconds() / 60
-    actual_worked_hours = ((datetime.datetime.strptime(str(Timer.objects.all().filter(user=request.user, start_work__startswith=restriction)).split('|')[4], '%m/%d/%Y, %H:%M:%S') - datetime.datetime.strptime(str(Timer.objects.all().filter(user=request.user)).split('|')[1], '%m/%d/%Y, %H:%M:%S')).total_seconds() / 60) - float(str(Timer.objects.filter(user=request.user, start_work__startswith=restriction)).split('|')[5].split('>')[0])
-    print(actual_worked_hours)
-    Timer.objects.filter(user=request.user, start_work__startswith=restriction).update(actual_worked_hours=actual_worked_hours / 60)
 
     return redirect('home_page')
     # a = Timer.objects.raw('select end_break from time_app_timer')
     # print(a)
-
-
-# def actually_worked_hours(request):
-#     print("Actually worked hours")
-#     for i in Timer.objects.all():
-#         print(i)
-#         print(str(i).split('|'))
-#     return HttpResponse("test")
-
