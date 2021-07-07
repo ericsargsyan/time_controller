@@ -170,5 +170,3 @@ def end_work(request):
         messages.error(request, "You cant press that button now, try later")
 
     return redirect('home_page')
-    # a = Timer.objects.raw('select end_break from time_app_timer')
-    # print(a)
