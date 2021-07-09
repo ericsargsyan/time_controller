@@ -17,6 +17,18 @@
 <body>
 <header>
 		<div class="container1">
+			<div class="left-sight">
+        		<div class="menu">
+					<ul>
+						<li class="active">
+							<a href="{% url 'home_page' %}">
+								<i class="fa fa-home" aria-hidden="true"></i>
+								Home
+							</a>
+						</li>
+					</ul>
+				</div>
+    		</div>
 			<div class="menu">
 				<ul>
 					{% if not request.user.is_authenticated %}
@@ -49,7 +61,7 @@
 				</ul>
 			</div>
   		</div>
-	</header>
+</header>
     <section>
         <div class="container">
             <div class="user signinbox">

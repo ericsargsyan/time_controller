@@ -5,12 +5,25 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Profile</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		  integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
 <header>
 		<div class="container1">
+			<div class="left-sight">
+        		<div class="menu">
+					<ul>
+						<li class="active">
+							<a href="{% url 'home_page' %}">
+								<i class="fa fa-home" aria-hidden="true"></i>
+								Home
+							</a>
+						</li>
+					</ul>
+				</div>
+    		</div>
 			<div class="menu">
 				<ul>
 					{% if not request.user.is_authenticated %}
@@ -58,7 +71,10 @@
 	<div class="container">
 		<div class="update">
 			<h2>Username: {{ user.username }}</h2>
-
+			Actual worked hours
+			{% for day in actual_worked_hours %}
+				<h2>{{ day }}</h2>
+			{% endfor %}
 		</div>
 	</div>
 </body>

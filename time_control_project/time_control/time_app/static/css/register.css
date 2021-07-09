@@ -4,14 +4,20 @@
     box-sizing: border-box;
 }
 
+a{
+    text-decoration: none;
+    cursor: pointer;
+}
+
 header{
-    width: 100%;
-    display: flex;
+    position: relative;
     padding:10px;
-    min-height: 60px;
+    min-height: 75px;
     border: 1px solid transparent;
     background: black;
     opacity: 0.5;
+    display: flex;
+    align-items: center;
 }
 
 .container1{
@@ -21,7 +27,7 @@ header{
     margin-right: auto;
     margin-left: auto;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -55,7 +61,7 @@ header{
 
 .menu >ul >li{
     list-style: none;
-    margin-left: 50px;
+    margin-left: 30px;
     font-size: 20px;
 }
 
@@ -64,12 +70,6 @@ header{
     cursor: pointer;
     color: white;
 }
-
-.menu>ul>li>a:hover{
-    border-bottom: 3px solid #ED1E24;
-    color: #ED1E24;
-}
-
 section{
     position: relative;
     min-height: 80vh;

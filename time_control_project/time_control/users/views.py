@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import UserUpdateForm, UserRegisterForm
 from django.contrib import messages
+from time_app.models import Timer, Break
 
 # Create your views here
 
@@ -45,8 +46,12 @@ def profile(request):
     u_form = UserUpdateForm(instance=request.user)
     # p_form = ProfileUpdateForm(instance=request.user.profile)
 
+    actual_worked_hours = [str(Timer.objects.filter(user=request.user)).split('|')[1].split(',')[0], str(Timer.objects.filter(user=request.user)).split('|')[-1].split('>')[0]]
+    print(actual_worked_hours)
+
     context = {
-                'u_form': u_form
+                'u_form': u_form,
+                'actual_worked_hours': actual_worked_hours
                 # 'p_form': p_form
     }
 
