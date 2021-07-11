@@ -10,7 +10,7 @@ a{
 
 body{
     min-height: 100vh;
-    background-image: url(../img/sign_out1.jpg);
+    background-image: url(../img/logout.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -26,13 +26,13 @@ body{
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background: #5169C8;
+    background: #161d2d;
     opacity: 0.6;
 }
 
 .sign_out > p{
     font-size: 25px;
-    color: #F7F8FB;
+    color: #d6f0f6;
 }
 
 .answer{
@@ -45,5 +45,5 @@ body{
 
 .answer > a{
     font-size: 25px;
-    color: #F7F8FB;
+    color: #d6f0f6;
 }

@@ -77,17 +77,29 @@ WSGI_APPLICATION = 'time_control.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# windows
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'cognitive',
-        'USER': 'eric',
-        'PASSWORD': 'oracle',
+        'USER': 'postgres',
+        'PASSWORD': 'Eric2001',
         'HOST': 'localhost',
         'PORT': 5432,
     }
 }
 
+#linux
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'cognitive',
+#         'USER': 'eric',
+#         'PASSWORD': 'oracle',
+#         'HOST': 'localhost',
+#         'PORT': 5432,
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

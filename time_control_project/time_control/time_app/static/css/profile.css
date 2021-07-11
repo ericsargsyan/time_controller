@@ -13,7 +13,7 @@ a{
 header{
     position: relative;
     padding:10px;
-    min-height: 75px;
+    min-height: 50px;
     border: 1px solid transparent;
     background: black;
     opacity: 0.5;
